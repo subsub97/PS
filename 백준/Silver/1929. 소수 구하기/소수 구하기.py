@@ -1,13 +1,15 @@
 import sys
 m,n = tuple(map(int,sys.stdin.readline().strip().split()))
 
-for i in range(m,n+1):
-    num = int(i ** 0.5)
-    cnt = 0
-    for j in range(1,num+1):
-        if i % j == 0:
-            cnt += 1
-        if cnt > 1:
-            break
-    if cnt == 1 and i != 1:
-        print(i)
+check_arr = [False,False] + [True] * (n -1) # -1 번째까지가 자신을 포함한 범위이다.
+primes=[]
+
+
+for i in range(2,n+1):
+    if check_arr[i]:
+        if i >= m:
+            primes.append(i)
+        for j in range(i,n+1,i):
+            check_arr[j] = False
+for num in primes:
+    print(num)
