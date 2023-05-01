@@ -18,3 +18,5 @@ def solution(citations):
     if citations[0] != 0 and answer == 0:
         answer = cnt
     return answer
+
+
