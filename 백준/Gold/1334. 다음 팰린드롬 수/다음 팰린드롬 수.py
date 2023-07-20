@@ -3,7 +3,7 @@ s = int(input())
 s +=1
 s = list(map(int,list(str(s))))
 # 적당히 10000번쯤 돌리면 수렴함
-for i in range(10):
+for i in range(2):
     # 리스트의 절반만 탐색하면 됨(어차피 앞 뒤로 같이 탐색함)
     for i in range(0,len(s)//2+1):
         # 앞뒤 숫자가 다른데, 뒤의 숫자가 큰 경우는 뒷의 숫자 앞의 수의 변조가 필요함.
