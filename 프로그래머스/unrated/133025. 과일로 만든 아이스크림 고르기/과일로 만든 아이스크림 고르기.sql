@@ -2,5 +2,6 @@ SELECT f.FLAVOR
 FROM FIRST_HALF as f 
     JOIN ICECREAM_INFO as i
     ON f.FLAVOR = i.FLAVOR
-WHERE f.TOTAL_ORDER >= 3000 AND
-      i.INGREDIENT_TYPE = 'fruit_based';
+WHERE f.TOTAL_ORDER > 3000 AND
+      i.INGREDIENT_TYPE = 'fruit_based'
+order by f.TOTAL_ORDER DESC;
