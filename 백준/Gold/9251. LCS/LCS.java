@@ -25,14 +25,8 @@ public class Main {
             }
         }
 
-        int ans = 0;
 
-        for (int i = 0; i < maxLength+1; i++) {
-            for (int j = 0; j < maxLength+1; j++) {
-                ans = Math.max(ans, dp[i][j]);
-            }
-        }
 
-        System.out.println(ans);
+        System.out.println(dp[wordA.length][wordB.length]);
     }
 }
