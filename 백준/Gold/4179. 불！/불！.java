@@ -139,7 +139,9 @@ public class Main {
                         q.add(new Pair(nR, nC, p.time + 1, 1));
                         if (nR == n - 1 || nR == 0 || nC == 0 || nC == m - 1) {
                             ans = p.time + 1;
-                            return;
+                            while(!q.isEmpty()){
+                        q.poll();
+                    }
                         }
                     }
 
