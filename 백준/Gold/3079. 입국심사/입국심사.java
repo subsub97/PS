@@ -1,53 +1,75 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.StringTokenizer;
+
 public class Main {
-    static int n;
-    static long m, max;
-    static int [] arr;
-    static long result = Long.MAX_VALUE;
-    public static void main(String[] args) throws IOException {
+    public static long m;
+    public static long[] table;
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
- 
-        String[] s = br.readLine().split(" ");
-        n = Integer.parseInt(s[0]);
-        m = Integer.parseInt(s[1]);
- 
-        arr = new int[n];
-        for(int i=0; i<n; i++){
-            arr[i] = Integer.parseInt(br.readLine());
-            max = Math.max(max,arr[i]);
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        long n = Integer.parseInt(st.nextToken());
+        m = Long.parseLong(st.nextToken());
+
+        table = new long[(int)n];
+
+        long max = 0;
+
+        for(int i = 0; i < n; i++) {
+            //심사대 입력 받기
+            table[i] = Integer.parseInt(br.readLine());
+            max = Math.max(table[i], max);
+
         }
-        Arrays.sort(arr);
- 
-        solve();
- 
-        System.out.println(result);
-    }
- 
-    private static void solve(){
-        long low = 0;
-        long high = m * max;
- 
-        while(low<=high){
-            long mid = (low+high)/2;
+
+        long left = 0;
+        long right = max * m;
+        long answer = Long.MAX_VALUE;
+
+        while(left <= right) {
+            long mid = (left + right) / 2;
             long sum = 0;
-            for(long index: arr){
-                long count = mid/index;
- 
-                if(sum>=m){
+
+//            sum = getPassCount(mid, (int)n);
+
+            for (long l : table) {
+                long cnt = mid/l;
+                
+                if(sum >= m) {
                     break;
                 }
-                sum+=count;
+                sum += cnt;
             }
-            if(sum>=m){
-                high = mid-1;
-                result = Math.min(mid,result);
+            
+
+            if(sum >= m) {
+                // 너무 많이 보냈다면
+                answer = Math.min(mid, answer);
+                right = mid - 1;
+
             }
             else{
-                low = mid+1;
+                left = mid + 1;
             }
         }
+
+        System.out.println(answer);
     }
+
+//    public static long getPassCount(long time,int n) {
+//        // time동안 몇명 Pass했는지 확인
+//        long sum = 0;
+//
+//        for (int i = 0; i < n; i++) {
+//            sum += time / table[i];
+//        }
+//
+//        return sum;
+//    }
+
+
 }
+
+
