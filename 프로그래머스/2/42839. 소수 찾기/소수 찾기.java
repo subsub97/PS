@@ -46,7 +46,7 @@ class Solution {
             
         }
     }
-    
+
     public boolean isPrime() {
         if(num.size() == 0) return false;
         
