@@ -21,6 +21,8 @@ public class Main {
             uf[i] = i;
         }
 
+        StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int cmd = Integer.parseInt(st.nextToken());
@@ -30,28 +32,32 @@ public class Main {
             if(cmd == 0) {
                 //합집합
                 union(p,c);
-            }
-
-            else{
+            } else{
                 if (find(p) == find(c)) {
-                    System.out.println("YES");
+                    sb.append("YES\n");
                     continue;
                 }
-                System.out.println("NO");
+                sb.append("NO\n");
             }
         }
+        System.out.println(sb);
     }
 
     static int find(int x) {
         if(uf[x] == x)
             return x;
-        uf[x] = find(uf[x]);
-        return uf[x];
+        return uf[x] = find(uf[x]);
     }
 
     static void union(int parent, int child) {
-        
-        uf[find(parent)] = find(child);
+        int a = find(parent);
+        int b = find(child);
+
+        if(a < b) {
+            uf[a] = b;
+            return;
+        }
+        uf[b] = a;
     }
 }
 
