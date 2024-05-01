@@ -11,9 +11,8 @@ public class Main {
     static int[][] pUnion;
     static boolean[] visited;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
+    public static void main(String[] args) throws Exception {
+        n = read();
 
         pUnion = new int[n+1][2];
         graph = new ArrayList[n+1];
@@ -25,10 +24,8 @@ public class Main {
 
 
         for (int i = 0; i < n-1; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
+            int a = read();
+            int b = read();
 
             graph[a].add(b);
             graph[b].add(a);
@@ -36,12 +33,11 @@ public class Main {
 
         findMychild(ROOT, ROOT, 1);
 
-        m = Integer.parseInt(br.readLine());
+        m = read();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < m; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
+            int a = read();
+            int b = read();
 
             sb.append(findMinCommonAncestor(a,b) + "\n");
         }
@@ -86,10 +82,12 @@ public class Main {
             aAncestor = pUnion[aAncestor][0];
             bAncestor = pUnion[bAncestor][0];
         }
-
         return ROOT;
-
     }
 
-
+    static int read() throws Exception {
+        int c, n = System.in.read() & 15;
+        while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
+        return n;
+    }
 }
