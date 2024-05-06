@@ -2,12 +2,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
 
     static int n,maxCost;
+    static int node;
     static ArrayList<Node>[] graph;
     static boolean[] visited;
 
@@ -17,7 +17,7 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
 
         graph = new ArrayList[n + 1];
-        visited = new boolean[n + 1];
+
 
         for (int i = 1; i <= n; i++) {
             graph[i] = new ArrayList<>();
@@ -33,11 +33,14 @@ public class Main {
             graph[a].add(new Node(b, cost));
             graph[b].add(new Node(a, cost));
         }
+        
+        node = 1;
+        visited = new boolean[n + 1];
+        dfs(1, 0);
 
-        for (int i = 1; i <= n; i++) {
-            visited = new boolean[n + 1];
-            dfs(i, 0);
-        }
+        visited = new boolean[n + 1];
+        dfs(node, 0);
+
 
         System.out.println(maxCost);
     }
@@ -47,6 +50,7 @@ public class Main {
 
         if (costSum > maxCost) {
             maxCost = costSum;
+            node = v;
         }
 
         for (int i = 0; i < graph[v].size(); i++) {
