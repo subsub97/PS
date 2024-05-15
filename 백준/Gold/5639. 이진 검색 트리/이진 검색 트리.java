@@ -7,9 +7,11 @@ public class Main {
     static ArrayList<Integer> list = new ArrayList<>();
     static int idx = 0;
     static Node root = null;
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
 
         String input;
         while(true) {
@@ -28,6 +30,7 @@ public class Main {
 
         makeTree(root,1);
         postOrder(root);
+        System.out.println(sb.toString());
 
     }
 
@@ -73,6 +76,6 @@ public class Main {
             postOrder(node.right);
         }
 
-        System.out.println(node.value);
+        sb.append(node.value + "\n");
     }
 }
